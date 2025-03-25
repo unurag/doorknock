@@ -1,70 +1,74 @@
-import {
-  Flex,
-  Heading,
-  Text,
-  Box,
-  Button,
-  chakra,
-} from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import { Flex, Heading, Text, Box, Button, chakra } from "@chakra-ui/react";
+import React, { useEffect, useRef, useState } from "react";
 import InputLogin from "./Components/InputLogin/InputLogin";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Onetimepassword from "./OneTimePassword/Onetimepassword";
+import axios from "axios";
 
 const Login = () => {
   const phoneInputRef = useRef(null);
   const [showOTPComponent, setShowOTPComponent] = useState(false);
   const [phone, setPhone] = useState("");
+  const [continueBtnStatus, setContinueBtnStatus] = useState(true);
 
   const MotionBox = chakra(motion.div);
 
+  const continueBtnStatusFn = (tempPhone) => {
+    if(tempPhone.length === 10) {
+      setContinueBtnStatus(false);
+    } else {
+      setContinueBtnStatus(true);
+    };
+  };
+
   const handleContinue = async () => {
+    setContinueBtnStatus(true);
     if (phoneInputRef.current) {
       const phoneNumber = phoneInputRef.current.value;
-      console.log(phoneNumber);
       setPhone(phoneNumber);
 
-      const data = { phoneNumber: phone };
+      const data = { phone: phoneNumber };
 
       try {
-        const response = await fetch("https://api.doorknock.in/v1/accounts", {
-          // Change to your server endpoint
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-        console.log("Response:", result);
+        axios
+          .post(`${import.meta.env.VITE_BACKEND_SERVER_URL}/v1/accounts`, data)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err.data);
+          });
         setShowOTPComponent(true);
       } catch (error) {
         console.error("Error:", error);
       }
     }
   };
+  
 
   return (
     <Flex w="100dvw" h="100dvh" direction={"column"}>
-        <AnimatePresence>
-      {showOTPComponent && (
-        <MotionBox
-          initial={{ x: "10%" }} // Start from right
-          animate={{ x: 0 }} // Slide to visible
-          exit={{ x: "100%", opacity: 0 }} // Slide out when hidden
-          transition={{ duration: 0.4, ease: [0.4, 0.0, 0.2, 1] }}
-          position="absolute"
-          width="100%"
-          zIndex="10"
-          bg="white"
-        //   p="4"
-          boxShadow="lg"
-        >
-          <Onetimepassword setShowOTPComponent={setShowOTPComponent} phoneNumber={phone} />
-        </MotionBox>
-      )}
+      <AnimatePresence>
+        {showOTPComponent && (
+          <MotionBox
+            initial={{ x: "10%" }} // Start from right
+            animate={{ x: 0 }} // Slide to visible
+            exit={{ x: "100%", opacity: 0 }} // Slide out when hidden
+            transition={{ duration: 0.4, ease: [0.4, 0.0, 0.2, 1] }}
+            position="absolute"
+            width="100%"
+            zIndex="10"
+            bg="white"
+            //   p="4"
+            boxShadow="lg"
+          >
+            <Onetimepassword
+              setShowOTPComponent={setShowOTPComponent}
+              phoneNumber={phone}
+            />
+          </MotionBox>
+        )}
       </AnimatePresence>
       {!showOTPComponent && (
         <>
@@ -157,17 +161,22 @@ const Login = () => {
                     </Group> 
                 </Stack> */}
 
-              <InputLogin ref={phoneInputRef} />
+              <InputLogin ref={phoneInputRef} onValueChange={continueBtnStatusFn} />
 
               <Button
                 variant={"subtle"}
                 w="80%"
                 h="3.7rem"
                 borderRadius="10px"
-                bg="inactive"
+                bg="id.activeblue"
                 color="#fff"
                 fontSize="lg"
                 onClick={handleContinue}
+                disabled={continueBtnStatus}
+                _disabled={{
+                  bg: "gray.400", // Background color for disabled state
+                  color: "gray.600", // Text color for disabled state
+                }}
               >
                 Continue
               </Button>
