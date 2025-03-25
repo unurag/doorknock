@@ -1,0 +1,34 @@
+.login-phone {
+    width: 80%;
+    margin: 1rem 0;
+    display: inline-block;
+    line-height: normal;
+    position: relative;
+}
+
+.login-phone__input {
+    box-sizing: border-box;
+    font-size: 18px;
+    padding: 15px 20px 15px 50px;
+    width: 100%;
+    border-radius: 12px;
+    font-weight: 500;
+    background: #fff;
+    border: 1px solid #ccc;
+    height: 3.5rem;
+    color: #333;
+    cursor: text;
+    outline: 0;
+}
+
+.login-phone::after {
+    color: #333;
+    content: '+91';
+    font-weight: 500;
+    font-size: 18px;
+    left: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
