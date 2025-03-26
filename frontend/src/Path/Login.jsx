@@ -1,7 +1,7 @@
 import { Flex, Heading, Text, Box, Button, chakra } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import InputLogin from "./Components/InputLogin/InputLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Onetimepassword from "./OneTimePassword/Onetimepassword";
 import axios from "axios";
@@ -11,6 +11,8 @@ const Login = () => {
   const [showOTPComponent, setShowOTPComponent] = useState(false);
   const [phone, setPhone] = useState("");
   const [continueBtnStatus, setContinueBtnStatus] = useState(true);
+
+  const navigate = useNavigate();
 
   const MotionBox = chakra(motion.div);
 
@@ -74,15 +76,15 @@ const Login = () => {
         <>
           <Flex
             w={"100%"}
-            h={"55%"}
+            h={["50%", "55%"]}
             bgImage={"url('/bg_login.png')"}
             bgSize={"cover"}
             bgPos={"center"}
             bgRepeat={"no-repeat"}
           >
             <Flex
-              w={"4rem"}
-              h={"4rem"}
+              w={["3rem", "4rem"]}
+              h={["3rem", "4rem"]}
               bg={"#fff"}
               borderRadius={"100%"}
               justifyContent={"center"}
@@ -95,18 +97,19 @@ const Login = () => {
               bgSize={"25px"}
               bgPos={"center"}
               bgRepeat={"no-repeat"}
+              onClick={() => navigate('/home')}
             ></Flex>
 
             <Flex
-              boxSize={"125px"}
+              boxSize={["100px", "125px"]}
               bgImage={
                 "url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjI4IiBoZWlnaHQ9IjIyOCIgdmlld0JveD0iMCAwIDIyOCAyMjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDUzLjQzNzVDMCAyMy45MjQ4IDIzLjkyNDggMCA1My40Mzc1IDBIMTc0LjU2MkMyMDQuMDc1IDAgMjI4IDIzLjkyNDggMjI4IDUzLjQzNzVWMTc0LjU2MkMyMjggMjA0LjA3NSAyMDQuMDc1IDIyOCAxNzQuNTYyIDIyOEg1My40Mzc1QzIzLjkyNDggMjI4IDAgMjA0LjA3NSAwIDE3NC41NjJWNTMuNDM3NVoiIGZpbGw9IiNFRjRGNUYiLz4KPHBhdGggZD0iTTM4LjI0NTggMTA5LjMyNEMzOS4xNzUzIDEwOS4zMjQgNDAuMDM5NiAxMDkuNTM2IDQwLjg1NSAxMDkuOTI4QzQxLjY3MDQgMTEwLjMxOSA0Mi4yNDEyIDExMC42OTQgNDIuNTgzNyAxMTEuMDY5TDQzLjA4OTIgMTExLjY3M1YxMDIuNjU0SDQ3LjU5MDJWMTI2LjA0SDQzLjA4OTJWMTI0LjAzNEM0My4wNDAzIDEyNC4wOTkgNDIuOTc1MSAxMjQuMTgxIDQyLjg3NzIgMTI0LjI3OEM0Mi43Nzk0IDEyNC4zNzYgNDIuNTgzNyAxMjQuNTcyIDQyLjI5MDEgMTI0LjgzM0M0MS45OTY2IDEyNS4wOTQgNDEuNjcwNCAxMjUuMzM5IDQxLjMyOCAxMjUuNTUxQzQwLjk2OTIgMTI1Ljc2MyA0MC41Mjg5IDEyNS45NDIgMzkuOTc0NCAxMjYuMTA1QzM5LjQxOTkgMTI2LjI2OCAzOC44MzI5IDEyNi4zNSAzOC4yNDU4IDEyNi4zNUMzNi4xMjU4IDEyNi4zNSAzNC4yODMgMTI1LjUzNCAzMi43MTc0IDEyMy44ODdDMzEuMTUxOSAxMjIuMjQgMzAuMzg1NCAxMjAuMjE4IDMwLjM4NTQgMTE3LjgzN0MzMC4zODU0IDExNS40NTYgMzEuMTUxOSAxMTMuNDUgMzIuNzE3NCAxMTEuODAzQzM0LjI4MyAxMTAuMTU2IDM2LjEyNTggMTA5LjMyNCAzOC4yNDU4IDEwOS4zMjRaTTM5LjA2MTIgMTIyLjM3QzQwLjE3MDEgMTIyLjM3IDQxLjExNiAxMjEuOTQ2IDQxLjg5ODcgMTIxLjA5OEM0Mi42ODE1IDEyMC4yNSA0My4wNzI5IDExOS4xNTggNDMuMDcyOSAxMTcuODUzQzQzLjA3MjkgMTE2LjUzMiA0Mi42ODE1IDExNS40NTYgNDEuODk4NyAxMTQuNjA4QzQxLjExNiAxMTMuNzYgNDAuMTcwMSAxMTMuMzM2IDM5LjA2MTIgMTEzLjMzNkMzNy45NTIyIDExMy4zMzYgMzcuMDA2NCAxMTMuNzYgMzYuMjIzNiAxMTQuNjA4QzM1LjQ0MDggMTE1LjQ1NiAzNS4wNDk0IDExNi41MzIgMzUuMDQ5NCAxMTcuODUzQzM1LjA0OTQgMTE5LjE1OCAzNS40NDA4IDEyMC4yNSAzNi4yMjM2IDEyMS4wOThDMzcuMDA2NCAxMjEuOTQ2IDM3Ljk1MjIgMTIyLjM3IDM5LjA2MTIgMTIyLjM3WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTU2LjExMDcgMTE3Ljg1M0M1Ni4xMTA3IDExOS4wNzYgNTYuNTAyMSAxMjAuMTA0IDU3LjMwMTIgMTIwLjkzNUM1OC4wODM5IDEyMS43NjcgNTkuMDI5OCAxMjIuMTc1IDYwLjEyMjQgMTIyLjE3NUM2MS4xOTg3IDEyMi4xNzUgNjIuMTQ0NiAxMjEuNzY3IDYyLjk0MzcgMTIwLjkzNUM2My43MjY0IDEyMC4xMDQgNjQuMTM0MSAxMTkuMDc2IDY0LjEzNDEgMTE3Ljg1M0M2NC4xMzQxIDExNi42MyA2My43MjY0IDExNS42MDMgNjIuOTQzNyAxMTQuNzU1QzYyLjE0NDYgMTEzLjkyMyA2MS4xOTg3IDExMy40OTkgNjAuMTIyNCAxMTMuNDk5QzU5LjAyOTggMTEzLjQ5OSA1OC4wODM5IDExMy45MjMgNTcuMzAxMiAxMTQuNzU1QzU2LjUwMjEgMTE1LjYwMyA1Ni4xMTA3IDExNi42MyA1Ni4xMTA3IDExNy44NTNaTTY4Ljc5ODIgMTE3LjgzN0M2OC43OTgyIDEyMC4xMiA2Ny45MzM5IDEyMi4xMSA2Ni4yMDUyIDEyMy44MDZDNjQuNDc2NiAxMjUuNTAyIDYyLjQ1NDQgMTI2LjM1IDYwLjEyMjQgMTI2LjM1QzU3Ljc3NDEgMTI2LjM1IDU1Ljc1MTkgMTI1LjUwMiA1NC4wMjMzIDEyMy44MDZDNTIuMjk0NiAxMjIuMTEgNTEuNDMwMyAxMjAuMTIgNTEuNDMwMyAxMTcuODM3QzUxLjQzMDMgMTE1LjU3IDUyLjI5NDYgMTEzLjU4MSA1NC4wMjMzIDExMS44ODVDNTUuNzUxOSAxMTAuMTg5IDU3Ljc3NDEgMTA5LjM0MSA2MC4xMjI0IDEwOS4zNDFDNjIuNDU0NCAxMDkuMzQxIDY0LjQ3NjYgMTEwLjE4OSA2Ni4yMDUyIDExMS44ODVDNjcuOTMzOSAxMTMuNTgxIDY4Ljc5ODIgMTE1LjU3IDY4Ljc5ODIgMTE3LjgzN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik03Ni4xNDQ1IDExNy44NTNDNzYuMTQ0NSAxMTkuMDc2IDc2LjUzNTkgMTIwLjEwNCA3Ny4zMzUgMTIwLjkzNUM3OC4xMTc4IDEyMS43NjcgNzkuMDYzNiAxMjIuMTc1IDgwLjE1NjIgMTIyLjE3NUM4MS4yMzI2IDEyMi4xNzUgODIuMTc4NCAxMjEuNzY3IDgyLjk3NzUgMTIwLjkzNUM4My43NjAzIDEyMC4xMDQgODQuMTY4IDExOS4wNzYgODQuMTY4IDExNy44NTNDODQuMTY4IDExNi42MyA4My43NjAzIDExNS42MDMgODIuOTc3NSAxMTQuNzU1QzgyLjE3ODQgMTEzLjkyMyA4MS4yMzI2IDExMy40OTkgODAuMTU2MiAxMTMuNDk5Qzc5LjA2MzYgMTEzLjQ5OSA3OC4xMTc4IDExMy45MjMgNzcuMzM1IDExNC43NTVDNzYuNTM1OSAxMTUuNjAzIDc2LjE0NDUgMTE2LjYzIDc2LjE0NDUgMTE3Ljg1M1pNODguODMyIDExNy44MzdDODguODMyIDEyMC4xMiA4Ny45Njc3IDEyMi4xMSA4Ni4yMzkxIDEyMy44MDZDODQuNTEwNCAxMjUuNTAyIDgyLjQ4ODMgMTI2LjM1IDgwLjE1NjIgMTI2LjM1Qzc3LjgwNzkgMTI2LjM1IDc1Ljc4NTggMTI1LjUwMiA3NC4wNTcxIDEyMy44MDZDNzIuMzI4NSAxMjIuMTEgNzEuNDY0MiAxMjAuMTIgNzEuNDY0MiAxMTcuODM3QzcxLjQ2NDIgMTE1LjU3IDcyLjMyODUgMTEzLjU4MSA3NC4wNTcxIDExMS44ODVDNzUuNzg1OCAxMTAuMTg5IDc3LjgwNzkgMTA5LjM0MSA4MC4xNTYyIDEwOS4zNDFDODIuNDg4MyAxMDkuMzQxIDg0LjUxMDQgMTEwLjE4OSA4Ni4yMzkxIDExMS44ODVDODcuOTY3NyAxMTMuNTgxIDg4LjgzMiAxMTUuNTcgODguODMyIDExNy44MzdaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTAyLjM1OSAxMDkuNDg3TDEwMi4zNDMgMTE0LjAyMUMxMDIuMDE3IDExMy45MDcgMTAxLjUxMSAxMTMuODQxIDEwMC44NDIgMTEzLjgyNUM5OS42NjgyIDExMy44MjUgOTguNzIyNCAxMTQuMiA5OC4wMzc1IDExNC45NUM5Ny4zNTI1IDExNS43MDEgOTYuOTkzOCAxMTYuNzc3IDk2Ljk5MzggMTE4LjE3OVYxMjYuMDIzSDkyLjQ5MjhWMTA5LjY1SDk2Ljk5MzhWMTExLjY1NkM5Ny4xMjQyIDExMS41MDkgOTcuMzE5OSAxMTEuMzE0IDk3LjU0ODIgMTExLjA2OUM5Ny43OTI4IDExMC44MjUgOTguMzE0NyAxMTAuNDk4IDk5LjEzMDEgMTEwLjA5MUM5OS45NDU1IDEwOS42OTkgMTAwLjc5MyAxMDkuNDg3IDEwMS42OSAxMDkuNDg3SDEwMi4zNTlaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTExLjg3NCAxMTkuNjhMMTA5Ljg4NSAxMjIuMDEyVjEyNi4wMjNIMTA1LjM2OFYxMDIuNjM4SDEwOS44ODVWMTE2LjMzN0wxMTUuNzIzIDEwOS42NUgxMjAuODkzTDExNC43MjggMTE2LjY3OUwxMjEuMjM1IDEyNi4wMjNIMTE2LjIyOUwxMTEuODc0IDExOS42OFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMjguMjM5IDEwOS42NUwxMjguMjIzIDExMS42NzNDMTI4LjM1MyAxMTEuNDkzIDEyOC41NDkgMTExLjI4MSAxMjguNzc3IDExMS4wMkMxMjkuMDIyIDExMC43NTkgMTI5LjU0NCAxMTAuNDE3IDEzMC4zNTkgMTA5Ljk3N0MxMzEuMTc0IDEwOS41NTMgMTMyLjAyMiAxMDkuMzI0IDEzMi45MDMgMTA5LjMyNEMxMzQuNzc4IDEwOS4zMjQgMTM2LjMxMSAxMDkuOTc3IDEzNy40ODUgMTExLjI2NUMxMzguNjYgMTEyLjU2OSAxMzkuMjQ3IDExNC4zMTQgMTM5LjI0NyAxMTYuNVYxMjYuMDIzSDEzNC43NDZWMTE3LjAwNUMxMzQuNzQ2IDExNi4wMSAxMzQuNDUyIDExNS4yMTEgMTMzLjg2NSAxMTQuNTkyQzEzMy4yNzggMTEzLjk3MiAxMzIuNTEyIDExMy42NjIgMTMxLjU4MiAxMTMuNjYyQzEzMC41NTUgMTEzLjY2MiAxMjkuNzM5IDExNC4wMDUgMTI5LjEzNiAxMTQuNjczQzEyOC41MzIgMTE1LjM0MiAxMjguMjM5IDExNi4yODggMTI4LjIzOSAxMTcuNTExVjEyNi4wMjNIMTIzLjczOFYxMDkuNjVIMTI4LjIzOVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNDcuNjA0IDExNy44NTNDMTQ3LjYwNCAxMTkuMDc2IDE0Ny45OTYgMTIwLjEwNCAxNDguNzk1IDEyMC45MzVDMTQ5LjU3NyAxMjEuNzY3IDE1MC41MjMgMTIyLjE3NSAxNTEuNjE2IDEyMi4xNzVDMTUyLjY5MiAxMjIuMTc1IDE1My42MzggMTIxLjc2NyAxNTQuNDM3IDEyMC45MzVDMTU1LjIyIDEyMC4xMDQgMTU1LjYyOCAxMTkuMDc2IDE1NS42MjggMTE3Ljg1M0MxNTUuNjI4IDExNi42MyAxNTUuMjIgMTE1LjYwMyAxNTQuNDM3IDExNC43NTVDMTUzLjYzOCAxMTMuOTIzIDE1Mi42OTIgMTEzLjQ5OSAxNTEuNjE2IDExMy40OTlDMTUwLjUyMyAxMTMuNDk5IDE0OS41NzcgMTEzLjkyMyAxNDguNzk1IDExNC43NTVDMTQ3Ljk5NiAxMTUuNjAzIDE0Ny42MDQgMTE2LjYzIDE0Ny42MDQgMTE3Ljg1M1pNMTYwLjI5MiAxMTcuODM3QzE2MC4yOTIgMTIwLjEyIDE1OS40MjcgMTIyLjExIDE1Ny42OTkgMTIzLjgwNkMxNTUuOTcgMTI1LjUwMiAxNTMuOTQ4IDEyNi4zNSAxNTEuNjE2IDEyNi4zNUMxNDkuMjY4IDEyNi4zNSAxNDcuMjQ1IDEyNS41MDIgMTQ1LjUxNyAxMjMuODA2QzE0My43ODggMTIyLjExIDE0Mi45MjQgMTIwLjEyIDE0Mi45MjQgMTE3LjgzN0MxNDIuOTI0IDExNS41NyAxNDMuNzg4IDExMy41ODEgMTQ1LjUxNyAxMTEuODg1QzE0Ny4yNDUgMTEwLjE4OSAxNDkuMjY4IDEwOS4zNDEgMTUxLjYxNiAxMDkuMzQxQzE1My45NDggMTA5LjM0MSAxNTUuOTcgMTEwLjE4OSAxNTcuNjk5IDExMS44ODVDMTU5LjQyNyAxMTMuNTgxIDE2MC4yOTIgMTE1LjU3IDE2MC4yOTIgMTE3LjgzN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNjIuOTU4IDExNy44MzdDMTYyLjk1OCAxMTUuNTcgMTYzLjgyMiAxMTMuNTgxIDE2NS41NjcgMTExLjg4NUMxNjcuMzI4IDExMC4xODkgMTY5LjM5OSAxMDkuMzI0IDE3MS43OTYgMTA5LjMyNEMxNzIuNjQ0IDEwOS4zMjQgMTczLjQ2IDEwOS40NTUgMTc0LjIyNiAxMDkuNjgzQzE3NC45OTMgMTA5LjkxMSAxNzUuNjEzIDExMC4xODkgMTc2LjEwMiAxMTAuNTE1QzE3Ni41OTEgMTEwLjg0MSAxNzcuMDMxIDExMS4xNTEgMTc3LjQwNiAxMTEuNDc3QzE3Ny43OTggMTExLjgwMyAxNzguMDc1IDExMi4wOTcgMTc4LjIzOCAxMTIuMzI1TDE3OC40ODMgMTEyLjY2N0wxNzUuNjQ1IDExNS41MDVDMTc1LjU2NCAxMTUuMzU4IDE3NS40MTcgMTE1LjE2MiAxNzUuMjIxIDExNC45MDJDMTc1LjAyNSAxMTQuNjU3IDE3NC41ODUgMTE0LjMzMSAxNzMuOTE2IDExMy45MzlDMTczLjI0OCAxMTMuNTQ4IDE3Mi41NDcgMTEzLjMzNiAxNzEuNzk2IDExMy4zMzZDMTcwLjYyMiAxMTMuMzM2IDE2OS41OTUgMTEzLjc3NiAxNjguNzQ3IDExNC42NTdDMTY3Ljg5OSAxMTUuNTM3IDE2Ny40NTkgMTE2LjYxNCAxNjcuNDU5IDExNy44NTNDMTY3LjQ1OSAxMTkuMDkzIDE2Ny44OTkgMTIwLjE1MyAxNjguNzQ3IDEyMS4wMzNDMTY5LjYxMSAxMjEuOTE0IDE3MC42MjIgMTIyLjM1NCAxNzEuNzk2IDEyMi4zNTRDMTcyLjU0NyAxMjIuMzU0IDE3My4yNDggMTIyLjE3NSAxNzMuOTE2IDEyMS44MTZDMTc0LjU4NSAxMjEuNDU3IDE3NS4wNzQgMTIxLjA5OCAxNzUuMzY4IDEyMC43NEwxNzUuODA4IDEyMC4xODVMMTc4LjQ4MyAxMjMuMDIzQzE3OC40MTcgMTIzLjEyMSAxNzguMzM2IDEyMy4yMzUgMTc4LjIyMiAxMjMuMzk4QzE3OC4xMDggMTIzLjU2MSAxNzcuODQ3IDEyMy44MjIgMTc3LjQyMyAxMjQuMTk3QzE3Ny4wMTUgMTI0LjU3MiAxNzYuNTc1IDEyNC44OTggMTc2LjA4NSAxMjUuMTkyQzE3NS42MTMgMTI1LjQ4NSAxNzQuOTkzIDEyNS43NDYgMTc0LjIyNiAxMjUuOTkxQzE3My40NiAxMjYuMjM1IDE3Mi42NDQgMTI2LjM1IDE3MS43OTYgMTI2LjM1QzE2OS4zOTkgMTI2LjM1IDE2Ny4zMjggMTI1LjUwMiAxNjUuNTgzIDEyMy44MDZDMTYzLjgyMiAxMjIuMTEgMTYyLjk1OCAxMjAuMTIgMTYyLjk1OCAxMTcuODM3WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE4OC41MiAxMTkuNjhMMTg2LjUzIDEyMi4wMTJWMTI2LjAyM0gxODIuMDEzVjEwMi42MzhIMTg2LjUzVjExNi4zMzdMMTkyLjM2OCAxMDkuNjVIMTk3LjUzOEwxOTEuMzc0IDExNi42NzlMMTk3Ljg4MSAxMjYuMDIzSDE5Mi44NzRMMTg4LjUyIDExOS42OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=)"
               }
-              bgSize={"125px"}
+              bgSize={["100px", "125px"]}
               pos={"absolute"}
               bottom={"50%"}
               left={"50%"}
-              transform={"translateX(-50%) translateY(88%)"}
+              transform={["translateX(-50%) translateY(49%)","translateX(-50%) translateY(85%)","translateX(-50%) translateY(104%)", "translateX(-50%) translateY(88%)"]}
               bgPos={"center"}
               bgRepeat={"no-repeat"}
             ></Flex>
@@ -114,14 +117,16 @@ const Login = () => {
 
           <Flex
             w={"100%"}
-            h={"45%"}
+            h={["50%", "45%"]}
             bg="#fff"
             flexDirection={"column"}
             justifyContent="space-between"
-            pt="5.5rem"
+            pt={["4rem", "5.5rem"]}
           >
             <Flex
               w="100%"
+              // bg='tomato'
+              h='100%'
               justifyContent={"center"}
               textAlign={"center"}
               alignItems={"center"}
@@ -129,7 +134,7 @@ const Login = () => {
               flexDir={"column"}
             >
               <Heading
-                fontSize={"1.7rem"}
+                fontSize={["1.3rem", "1.7rem"]}
                 fontWeight={"800"}
                 fontFamily={"body"}
                 color={"text"}
@@ -139,8 +144,8 @@ const Login = () => {
               </Heading>
               <Text
                 color={"text.secondary"}
-                fontSize={"1rem"}
-                mt={2}
+                fontSize={["0.85rem", "1rem"]}
+                mt={[1, 2]}
                 fontWeight={"600"}
               >
                 Log in or sign up
@@ -165,7 +170,7 @@ const Login = () => {
 
               <Button
                 variant={"subtle"}
-                w="80%"
+                w={["85%", "80%"]}
                 h="3.7rem"
                 borderRadius="10px"
                 bg="id.activeblue"
@@ -188,11 +193,11 @@ const Login = () => {
               borderTopStyle="solid"
               borderTopColor="box_login.border"
               w="100%"
-              h="3.5rem"
+              h={["2.5rem", "3.5rem"]}
               justifyContent="center"
               alignItems="center"
             >
-              <Text color="text.inactive" fontSize="0.75rem">
+              <Text color="text.inactive" fontSize={["0.65rem", "0.75rem"]}>
                 By continuing you agree to our:{" "}
                 <Box as="span" fontWeight="500" mx={1}>
                   <Link href="/terms" fontWeight="500">

@@ -32,3 +32,9 @@
     transform: translateY(-50%);
 
 }
+
+@media (max-width: 480px) {
+    .login-phone {
+        width: 85%;
+    }
+}
