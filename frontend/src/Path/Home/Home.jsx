@@ -1,5 +1,6 @@
-import { Flex, Text, Box } from '@chakra-ui/react'
+import { Flex, Text, Image } from '@chakra-ui/react'
 import React from 'react'
+import Truck from '../../icons/Truck-splash_screen.png'
 
 const Home = () => {
   return (
@@ -30,48 +31,66 @@ const Home = () => {
                 h='auto'
                 color='text.homeminutes'
                 bg='id.secondary'
-                px={6}
+                px={2}
+                justifyContent='space-between'
             >
 
                 <Flex
                     flexDir='column'
-                    w='90%'
+                    // w='90%'
+                    w='fit-content'
                 >
-                    <Text fontWeight={800} fontSize='1.3rem' letterSpacing='-1px'>Knocking in</Text>
+                    <Text fontWeight={800} fontSize={['0.85rem', '1.3rem']}>Knocking in</Text>
                     <Flex
                         h='fit-content'
-                        mt='-1.15rem'
+                        mt={['-0.7rem', '-1.15rem']}
                         alignItems='center'
                     >
-                        <Text fontWeight={800} letterSpacing='-1px' fontSize='2.5rem'>20 minutes</Text>
+                        <Text fontWeight={800} letterSpacing='-1px' fontSize={['1.75rem', '2.5rem']}>20 minutes</Text>
                         {/* free delivery tag */}
                         <Flex
-                            w='35%'
-                            h='1.9rem'
+                            w='fit-content'
+                            h={['1.35rem', '1.9rem']}
                             bg='inactive.freedelivery'
                             borderRadius='39px'
                             alignItems='center'
-                            px={'0.3rem'}
-                            ml={4}
+                            pl={['0.25rem', '0.3rem']}
+                            pr={'0.55rem'}
+                            ml={[3, 4]}
                         >
 
                             <Flex
-                                w={'1.35rem'}
-                                h={'1.35rem'}
+                                w={['1rem', '1.35rem']}
+                                h={['1rem', '1.35rem']}
                                 bg='id.activeblue'
                                 borderRadius='full'
+                                justifyContent='center'
+                                alignItems='center'
                             >
-
+                                <Image src={Truck} alt='Truck' w={['10px', '14px']} />
                             </Flex>
+
+                            <Text color='id.activeblue' ml={1} fontWeight='600' fontSize='0.75rem'>Free Delivery</Text>
 
                         </Flex>
                     </Flex>
                 </Flex>
 
+                {/* for user profile */}
                 <Flex
-                    w='10%'
+                    w='15%'
+                    h='100%'
+                    justifyContent='flex-end'
+                    alignItems='center'
                 >
-                    <Text>pfp</Text>
+                    <Flex
+                        w='2.5rem'
+                        h='2.5rem'
+                        borderRadius='50%'
+                        bg='inactive.profilehome'
+                    >
+
+                    </Flex>
                 </Flex>
 
             </Flex>

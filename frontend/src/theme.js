@@ -40,7 +40,8 @@ export const system = createSystem(defaultConfig, {
                 },
                 inactive: {
                     DEFAULT: { value: "#AFB4C0" },
-                    freedelivery: { value: "rgba(254, 254, 254, 0.38)" }
+                    freedelivery: { value: "rgba(254, 254, 254, 0.38)" },
+                    profilehome: { value: "#ffffff70" }
                 },
                 box_login: {
                     DEFAULT: {value: "#F8F9FC"},
