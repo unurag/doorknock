@@ -30,6 +30,7 @@ export const system = createSystem(defaultConfig, {
                 },
                 text: {
                     DEFAULT: { value: "#363636" },
+                    maindim: { value: "#333333" },
                     secondary: { value: "#596378" },
                     inactive: { value: "#5E687C"},
                     homeminutes: { value: "#0E0E0E" }

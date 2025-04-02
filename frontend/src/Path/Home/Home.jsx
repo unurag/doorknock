@@ -1,8 +1,36 @@
-import { Flex, Text, Image } from '@chakra-ui/react'
-import React from 'react'
-import Truck from '../../icons/Truck-splash_screen.png'
+import { Flex, Text, Box, Image } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import ETAandProfile from './Components/ETAandProfile'
+import AddressAndLocation from './Components/AddressAndLocation'
+import SearchBar from './Components/SearchBar'
+import { updateThemeColor } from '../../themeColor'
+
+import AllIcon from '../../icons/all.svg';
+import SnacksIcon from '../../icons/snacks.svg';
+import DrinksIcon from '../../icons/drinks.svg';
+import PanCornerIcon from '../../icons/pan_corner.svg';
+import RationIcon from '../../icons/ration.svg';
+import DairyIcon from '../../icons/dairy.svg';
 
 const Home = () => {
+
+    const categories = ["All", "Snacks", "Drinks", "Pan Corner", "Ration", "Dairy"];
+
+    const categoryIcons = {
+        All: AllIcon,
+        Snacks: SnacksIcon,
+        Drinks: DrinksIcon,
+        "Pan Corner": PanCornerIcon,
+        Ration: RationIcon,
+        Dairy: DairyIcon
+    };
+
+    const [selected, setSelected] = useState("All");
+
+    useEffect(() => {
+        updateThemeColor('#fefefe')
+    }, []);
+
   return (
     <Flex
         w='100dvw'
@@ -12,7 +40,9 @@ const Home = () => {
     >
         <Flex
             w='100%'
-            h='30%'
+            h={['28%', '28%', '22%', '23%', '28%']}
+            minH={['16rem', '19rem', '19rem', '20rem', '19rem' ]}
+            gap='2rem'
             // bg='homegradient.half'
             bgGradient='to-b'
             gradientFrom='homegradient'
@@ -22,77 +52,83 @@ const Home = () => {
             borderBottomStyle='solid'
             borderBottomColor='border.home'
             flexDir='column'
-            justifyContent='flex-end'
+            justifyContent='space-between'
+            // pos='absolute'
+            // paddingBottom='4rem'
         >
 
-            {/* container profile and navigation */}
             <Flex
-                w='100%'
-                h='auto'
-                color='text.homeminutes'
-                bg='id.secondary'
-                px={2}
-                justifyContent='space-between'
+                flexDir='column'
+                pt={5}
+                gap={'0rem'}
             >
 
-                <Flex
-                    flexDir='column'
-                    // w='90%'
-                    w='fit-content'
-                >
-                    <Text fontWeight={800} fontSize={['0.85rem', '1.3rem']}>Knocking in</Text>
-                    <Flex
-                        h='fit-content'
-                        mt={['-0.7rem', '-1.15rem']}
-                        alignItems='center'
-                    >
-                        <Text fontWeight={800} letterSpacing='-1px' fontSize={['1.75rem', '2.5rem']}>20 minutes</Text>
-                        {/* free delivery tag */}
+                {/* container profile and navigation */}
+                <ETAandProfile />
+
+                {/* Address */}
+                <AddressAndLocation />
+            {/* Search Bar */}
+            <SearchBar />
+            </Flex>
+
+
+            <Flex
+                w='100%'
+                h='4.5rem'
+                // bg='green.400'
+                // position='absolute'
+                // bottom='0'
+                // left='0'
+
+                overflowX='auto'
+                overflowY='hidden'
+                whiteSpace="nowrap"
+                p={2}
+                css={{
+                    "&::-webkit-scrollbar": { display: "none" },
+                    "-ms-overflow-style": "none",
+                    "scrollbar-width": "none",
+                }}
+                // alignItems='center'
+            >
+                    {categories.map((category) => (
                         <Flex
-                            w='fit-content'
-                            h={['1.35rem', '1.9rem']}
-                            bg='inactive.freedelivery'
-                            borderRadius='39px'
+                            key={category}
+                            px={4}
+                            py={2}
+                            cursor="pointer"
+                            position="relative"
+                            textAlign='center'
+                            onClick={() => setSelected(category)}
+                            flexDir='column'
+                            justifyContent='center'
                             alignItems='center'
-                            pl={['0.25rem', '0.3rem']}
-                            pr={'0.55rem'}
-                            ml={[3, 4]}
                         >
+                            <Box w='1.6rem' h='1.6rem' overflow='visible' mb='0.1rem'>
+                            <Image src={categoryIcons[category]} height='1.6rem' width='auto' />
+                            </Box>
 
-                            <Flex
-                                w={['1rem', '1.35rem']}
-                                h={['1rem', '1.35rem']}
-                                bg='id.activeblue'
-                                borderRadius='full'
-                                justifyContent='center'
-                                alignItems='center'
-                            >
-                                <Image src={Truck} alt='Truck' w={['10px', '14px']} />
-                            </Flex>
+                            <Text fontSize='1rem' fontWeight={selected === category ? "600" : "400"} color={selected === category ? "#000" : "text.inactive"}>
+                                {category}
+                            </Text>
 
-                            <Text color='id.activeblue' ml={1} fontWeight='600' fontSize='0.75rem'>Free Delivery</Text>
-
+                            {/* Underline Effect */}
+                            {selected === category && (
+                                <Box 
+                                    position='absolute'
+                                    bottom='-11px'
+                                    left='50%'
+                                    transform="translateX(-50%)"
+                                    w='75%'
+                                    h='7px'
+                                    bg='#000'
+                                    borderRadius='10px 10px 0 0'
+                                    clipPath='inset(0 0 45% 0)'
+                                />
+                            )}
                         </Flex>
-                    </Flex>
-                </Flex>
-
-                {/* for user profile */}
-                <Flex
-                    w='15%'
-                    h='100%'
-                    justifyContent='flex-end'
-                    alignItems='center'
-                >
-                    <Flex
-                        w='2.5rem'
-                        h='2.5rem'
-                        borderRadius='50%'
-                        bg='inactive.profilehome'
-                    >
-
-                    </Flex>
-                </Flex>
-
+                    ))}
             </Flex>
 
         </Flex>
@@ -100,7 +136,8 @@ const Home = () => {
         {/* bottom display */}
         <Flex
             w='100%'
-            h='70%'
+            h='72%'
+            bg='purple'
         >
 
         </Flex>
