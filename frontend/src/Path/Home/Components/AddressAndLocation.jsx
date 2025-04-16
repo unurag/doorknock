@@ -8,6 +8,7 @@ const AddressAndLocation = () => {
                     h='auto'
                     px={1}
                     alignItems='center'
+                    mt={['-0.5rem', '-1rem']}
                     // mt='-2.5rem'
                 >
     
