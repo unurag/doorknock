@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Onetimepassword = ({ setShowOTPComponent, phoneNumber }) => {
   const [otpValue, setOTPValue] = useState(["", "", "", ""]);
-  const [resendTimer, setResendTimer] = useState(120);
+  const [resendTimer, setResendTimer] = useState(0);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -51,6 +51,31 @@ const Onetimepassword = ({ setShowOTPComponent, phoneNumber }) => {
       setTimeout(() => {
         setError("");
       }, 7000);
+    }
+  };
+
+  const resendOTP = async () => {
+    const data = {
+      phone: phoneNumber,
+    };
+
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_SERVER_URL}/v1/accounts`,
+        data
+      );
+      if (res.data.success) {
+        setError(res.data.message || "OTP resent successfully");
+        // setResendTimer(120);
+      }
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data?.message || "Server error occurred.");
+      } else if (err.request) {
+        setError("Network error. Please check your connection.");
+      } else {
+        setError(err.response.data?.message  || "An unexpected error occurred.");
+      }
     }
   };
 
@@ -146,7 +171,7 @@ const Onetimepassword = ({ setShowOTPComponent, phoneNumber }) => {
               color="id.activeblue"
               cursor="pointer"
               mt={5}
-              onClick={() => setResendTimer(120)}
+              onClick={() => resendOTP()}
             >
               Resend OTP
             </Text>

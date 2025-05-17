@@ -3,7 +3,7 @@ require('dotenv').config();
 
 
 const redisClient = createClient({
-    url: `redis://default:${process.env.REDIS_PASSWORD}@redis-12047.c212.ap-south-1-1.ec2.redns.redis-cloud.com:12047`
+    url: `redis://default:${process.env.REDIS_PASSWORD}@redis-13376.c264.ap-south-1-1.ec2.redns.redis-cloud.com:13376`
 });
 
 redisClient.on('error', (err) => console.log('Redis Error:', err));
