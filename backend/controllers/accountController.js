@@ -14,7 +14,7 @@ const {
 //Rate limit 5/15min --otp
 const otpLimiter = rateLimit({
   windowMs: 10 * 60 * 1000,
-  max: 500,
+  max: 5,
   message: {
     success: "false",
     message: "Too many OTP requests. Try again later.",
@@ -23,7 +23,7 @@ const otpLimiter = rateLimit({
 
 const otpVerifyLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 1500,
+  max: 15,
   message: {
     success: false,
     message: "Chill! Take a break too many verifications 😮‍💨",
