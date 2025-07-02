@@ -6,7 +6,7 @@ import axios from "axios";
 
 const Onetimepassword = ({ setShowOTPComponent, phoneNumber }) => {
   const [otpValue, setOTPValue] = useState(["", "", "", ""]);
-  const [resendTimer, setResendTimer] = useState(0);
+  const [resendTimer, setResendTimer] = useState(120);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const Onetimepassword = ({ setShowOTPComponent, phoneNumber }) => {
       );
       if (res.data.success) {
         setError(res.data.message || "OTP resent successfully");
-        // setResendTimer(120);
+        setResendTimer(120);
       }
     } catch (err) {
       if (err.response) {

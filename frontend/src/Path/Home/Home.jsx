@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import ETAandProfile from "./Components/ETAandProfile";
 import AddressAndLocation from "./Components/AddressAndLocation";
@@ -48,7 +48,19 @@ const Home = () => {
       </Flex>
 
       {/* bottom display */}
-      <Flex w="100%" flex='1' bg="magenta"></Flex>
+      <Flex w="100%" flex='1' bg="#fefefe" flexDir="column">
+        <Flex 
+          color="text.secondary"
+          px={2}
+          pt={6}
+          w="100%"
+        >
+          <Text fontSize="1.25rem" fontWeight="700" color="text.homeminutes">Bestsellers</Text>
+
+          
+
+        </Flex>
+      </Flex>
     </Flex>
   );
 };
